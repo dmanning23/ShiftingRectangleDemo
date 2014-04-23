@@ -1,13 +1,7 @@
-﻿#region Using Statements
-using System;
-using System.Collections.Generic;
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Content;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-using Microsoft.Xna.Framework.Storage;
-using Microsoft.Xna.Framework.GamerServices;
-#endregion
+using ResolutionBuddy;
 
 namespace ShiftingRectangleDemo.Windows
 {
@@ -20,9 +14,10 @@ namespace ShiftingRectangleDemo.Windows
 		SpriteBatch spriteBatch;
 
 		public Game1()
-			: base()
 		{
 			graphics = new GraphicsDeviceManager(this);
+			graphics.SupportedOrientations = DisplayOrientation.LandscapeLeft;
+			Resolution.Init(ref graphics);
 			Content.RootDirectory = "Content";
 		}
 
@@ -34,8 +29,13 @@ namespace ShiftingRectangleDemo.Windows
 		/// </summary>
 		protected override void Initialize()
 		{
-			// TODO: Add your initialization logic here
+			// Change Virtual Resolution
+			Resolution.SetDesiredResolution(1280, 720);
 
+			//set the desired resolution
+			Resolution.SetScreenResolution(1024, 768, false);
+
+			// TODO: Add your initialization logic here
 			base.Initialize();
 		}
 
@@ -48,16 +48,7 @@ namespace ShiftingRectangleDemo.Windows
 			// Create a new SpriteBatch, which can be used to draw textures.
 			spriteBatch = new SpriteBatch(GraphicsDevice);
 
-			// TODO: use this.Content to load your game content here
-		}
-
-		/// <summary>
-		/// UnloadContent will be called once per game and is the place to unload
-		/// all content.
-		/// </summary>
-		protected override void UnloadContent()
-		{
-			// TODO: Unload any non ContentManager content here
+			//TODO: use this.Content to load your game content here 
 		}
 
 		/// <summary>
@@ -67,11 +58,15 @@ namespace ShiftingRectangleDemo.Windows
 		/// <param name="gameTime">Provides a snapshot of timing values.</param>
 		protected override void Update(GameTime gameTime)
 		{
-			if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
-				Exit();
+			// For Mobile devices, this logic will close the Game when the Back button is pressed
+			// Allows the game to exit
+			if ((GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed) ||
+				Keyboard.GetState().IsKeyDown(Keys.Escape))
+			{
+				this.Exit();
+			}
 
 			// TODO: Add your update logic here
-
 			base.Update(gameTime);
 		}
 
@@ -81,10 +76,13 @@ namespace ShiftingRectangleDemo.Windows
 		/// <param name="gameTime">Provides a snapshot of timing values.</param>
 		protected override void Draw(GameTime gameTime)
 		{
-			GraphicsDevice.Clear(Color.CornflowerBlue);
+			// Clear to Black
+			graphics.GraphicsDevice.Clear(Color.Black);
 
-			// TODO: Add your drawing code here
+			// Calculate Proper Viewport according to Aspect Ratio
+			Resolution.ResetViewport();
 
+			// The real drawing happens inside the screen manager component.
 			base.Draw(gameTime);
 		}
 	}
