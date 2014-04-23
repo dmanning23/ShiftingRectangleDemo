@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using ResolutionBuddy;
+using ShiftingRectangles;
 
 namespace ShiftingRectangleDemo.Windows
 {
@@ -12,6 +13,7 @@ namespace ShiftingRectangleDemo.Windows
 	{
 		GraphicsDeviceManager graphics;
 		SpriteBatch spriteBatch;
+		RectBackground rects;
 
 		public Game1()
 		{
@@ -49,6 +51,9 @@ namespace ShiftingRectangleDemo.Windows
 			spriteBatch = new SpriteBatch(GraphicsDevice);
 
 			//TODO: use this.Content to load your game content here 
+
+			rects = new RectBackground(Resolution.TitleSafeArea, Color.Black, Color.White);
+			rects.LoadContent(GraphicsDevice);
 		}
 
 		/// <summary>
@@ -67,6 +72,28 @@ namespace ShiftingRectangleDemo.Windows
 			}
 
 			// TODO: Add your update logic here
+
+			Vector2 vel = Vector2.Zero;
+			if (Keyboard.GetState().IsKeyDown(Keys.Up))
+			{
+				vel.Y -= 256.0f;
+			}
+			if (Keyboard.GetState().IsKeyDown(Keys.Down))
+			{
+				vel.Y += 256.0f;
+			}
+			if (Keyboard.GetState().IsKeyDown(Keys.Left))
+			{
+				vel.X -= 256.0f;
+			}
+			if (Keyboard.GetState().IsKeyDown(Keys.Right))
+			{
+				vel.X += 256.0f;
+			}
+
+			rects.Velocity = vel;
+			rects.Update(gameTime);
+
 			base.Update(gameTime);
 		}
 
@@ -77,10 +104,19 @@ namespace ShiftingRectangleDemo.Windows
 		protected override void Draw(GameTime gameTime)
 		{
 			// Clear to Black
-			graphics.GraphicsDevice.Clear(Color.Black);
+			graphics.GraphicsDevice.Clear(Color.Gray);
 
 			// Calculate Proper Viewport according to Aspect Ratio
 			Resolution.ResetViewport();
+
+			spriteBatch.Begin(SpriteSortMode.Immediate,
+				BlendState.AlphaBlend,
+				null, null, null, null,
+				Resolution.TransformationMatrix());
+
+			rects.Draw(spriteBatch);
+
+			spriteBatch.End();
 
 			// The real drawing happens inside the screen manager component.
 			base.Draw(gameTime);
