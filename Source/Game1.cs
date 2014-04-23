@@ -54,7 +54,7 @@ namespace ShiftingRectangleDemo.Windows
 
 			//TODO: use this.Content to load your game content here 
 
-			rects = new RectBackground(Resolution.TitleSafeArea, Color.Black, Color.White);
+			rects = new RectBackground(Resolution.TitleSafeArea, Color.Gray, Color.DarkGray);
 			rects.LoadContent(GraphicsDevice);
 
 			prim = new XNABasicPrimitive(GraphicsDevice, spriteBatch);
@@ -77,22 +77,24 @@ namespace ShiftingRectangleDemo.Windows
 
 			// TODO: Add your update logic here
 
+			const float scrollSpeed = 512.0f;
+
 			Vector2 vel = Vector2.Zero;
 			if (Keyboard.GetState().IsKeyDown(Keys.Up))
 			{
-				vel.Y -= 256.0f;
+				vel.Y += scrollSpeed;
 			}
 			if (Keyboard.GetState().IsKeyDown(Keys.Down))
 			{
-				vel.Y += 256.0f;
+				vel.Y -= scrollSpeed;
 			}
 			if (Keyboard.GetState().IsKeyDown(Keys.Left))
 			{
-				vel.X -= 256.0f;
+				vel.X += scrollSpeed;
 			}
 			if (Keyboard.GetState().IsKeyDown(Keys.Right))
 			{
-				vel.X += 256.0f;
+				vel.X -= scrollSpeed;
 			}
 
 			rects.Velocity = vel;
@@ -108,7 +110,7 @@ namespace ShiftingRectangleDemo.Windows
 		protected override void Draw(GameTime gameTime)
 		{
 			// Clear to Black
-			graphics.GraphicsDevice.Clear(Color.Gray);
+			graphics.GraphicsDevice.Clear(Color.LightGray);
 
 			// Calculate Proper Viewport according to Aspect Ratio
 			Resolution.ResetViewport();
