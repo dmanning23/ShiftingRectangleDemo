@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using ResolutionBuddy;
 using ShiftingRectangles;
+using BasicPrimitiveBuddy;
 
 namespace ShiftingRectangleDemo.Windows
 {
@@ -14,6 +15,7 @@ namespace ShiftingRectangleDemo.Windows
 		GraphicsDeviceManager graphics;
 		SpriteBatch spriteBatch;
 		RectBackground rects;
+		XNABasicPrimitive prim;
 
 		public Game1()
 		{
@@ -54,6 +56,8 @@ namespace ShiftingRectangleDemo.Windows
 
 			rects = new RectBackground(Resolution.TitleSafeArea, Color.Black, Color.White);
 			rects.LoadContent(GraphicsDevice);
+
+			prim = new XNABasicPrimitive(GraphicsDevice, spriteBatch);
 		}
 
 		/// <summary>
@@ -115,6 +119,8 @@ namespace ShiftingRectangleDemo.Windows
 				Resolution.TransformationMatrix());
 
 			rects.Draw(spriteBatch);
+
+			prim.Rectangle(Resolution.TitleSafeArea, Color.Red);
 
 			spriteBatch.End();
 

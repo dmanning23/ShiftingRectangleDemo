@@ -63,6 +63,10 @@
     <Folder Include="Content\" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\externals\BasicPrimitiveBuddy\Windows\BasicPrimitiveBuddy.Windows.csproj">
+      <Project>{0faa1286-7bfa-4765-8b51-62e438cb121d}</Project>
+      <Name>BasicPrimitiveBuddy.Windows</Name>
+    </ProjectReference>
     <ProjectReference Include="..\externals\GameTimer\Windows\GameTimer.Windows.csproj">
       <Project>{6b6d4188-5c03-4e16-923b-96fdbc85b91a}</Project>
       <Name>GameTimer.Windows</Name>
