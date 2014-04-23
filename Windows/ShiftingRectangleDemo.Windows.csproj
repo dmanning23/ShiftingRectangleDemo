@@ -11,6 +11,8 @@
     <RootNamespace>ShiftingRectangleDemo.Windows</RootNamespace>
     <AssemblyName>ShiftingRectangleDemo.Windows</AssemblyName>
     <FileAlignment>512</FileAlignment>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
     <PlatformTarget>x86</PlatformTarget>
@@ -21,6 +23,7 @@
     <DefineConstants>DEBUG;TRACE;WINDOWS</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
     <PlatformTarget>x86</PlatformTarget>
@@ -30,6 +33,7 @@
     <DefineConstants>TRACE;WINDOWS</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup>
     <ApplicationIcon>Icon.ico</ApplicationIcon>
@@ -71,10 +75,21 @@
       <Project>{f0bba30f-66e1-4e2f-bdf6-e17ff317c34e}</Project>
       <Name>RandomExtensions.Windows</Name>
     </ProjectReference>
+    <ProjectReference Include="..\externals\ResolutionBuddy\Windows\ResolutionBuddy.Windows.csproj">
+      <Project>{28342df0-0089-4a2a-b3d4-6dcd65d6d8e4}</Project>
+      <Name>ResolutionBuddy.Windows</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\externals\ShiftingRectangles\Windows\ShiftingRectangles.Windows.csproj">
+      <Project>{490a513b-425d-40fc-af16-fbff0841136b}</Project>
+      <Name>ShiftingRectangles.Windows</Name>
+    </ProjectReference>
     <ProjectReference Include="..\externals\Vector2Extensions\Windows\Vector2Extensions.Windows.csproj">
       <Project>{2c5acada-d15a-4193-ba0a-d36a362075f4}</Project>
       <Name>Vector2Extensions.Windows</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
