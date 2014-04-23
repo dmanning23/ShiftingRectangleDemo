@@ -7,3 +7,9 @@
 [submodule "externals/Vector2Extensions"]
 	path = externals/Vector2Extensions
 	url = git@github.com:dmanning23/Vector2Extensions.git
+[submodule "externals/ShiftingRectangles"]
+	path = externals/ShiftingRectangles
+	url = git@github.com:dmanning23/ShiftingRectangles.git
+[submodule "externals/GameTimer"]
+	path = externals/GameTimer
+	url = git@github.com:dmanning23/GameTimer.git
